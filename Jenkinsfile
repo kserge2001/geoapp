@@ -23,6 +23,7 @@ pipeline {
 
             }
        }
+
        stage('unit test') {
             steps {
               sh 'mvn clean'
@@ -30,6 +31,7 @@ pipeline {
               sh 'mvn compile'
             }
        }
+       /*
        stage('Sonarqube Scan'){
             steps{
                 withSonarQubeEnv(credentialsId: "${SONAQUBE_CRED}", \
@@ -51,9 +53,15 @@ pipeline {
                  sh "trivy fs --format table -o maven_dependency.html ."
             }
         }
-       
-     
-
-
+        */
+        stage('package app'){
+            steps{
+              sh 'mvn package'
+              sh 'ls'
+              sh 'pwd'
+              sh 'ls target'
+            }
+        }
+      
 }
 }
