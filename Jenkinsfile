@@ -7,7 +7,9 @@ pipeline {
        BRANCH_NAME = 'main'
        GIT_URL = 'https://github.com/kserge2001/geoapp.git'
        GITHUB_CREDENTIALS = 'github-Credentials'
-
+       SONAQUBE_CRED = 'Sonar-cred'
+       SONAQUBE_INSTALLATION = 'Sonar-server'
+       APP_NAME = 'geoapp'
        }
 
        stages{
@@ -26,6 +28,14 @@ pipeline {
               sh 'mvn compile'
             }
        }
+       stage('Sonarqube Scan'){
+            steps{
+                withSonarQubeEnv(credentialsId: "${SONAQUBE_CRED}", \
+                installationName: "${SONAQUBE_INSTALLATION}" ) {
+              sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=${APP_NAME} -Dsonar.projectKey=${APP_NAME} \
+                   -Dsonar.java.binaries=. '''
 }
-
+            }
+        }       
+}
 }
