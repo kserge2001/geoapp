@@ -11,6 +11,7 @@ pipeline {
        SONAQUBE_CRED = 'Sonar-cred'
        SONAQUBE_INSTALLATION = 'Sonar-server'
        APP_NAME = 'geoapp'
+  
        }
 
        stages{
@@ -37,6 +38,16 @@ pipeline {
                    -Dsonar.java.binaries=. '''
 }
             }
-        }       
+        }
+        stage('Quality Gate Check'){
+            steps{
+              script{
+                 waitForQualityGate abortPipeline: false, credentialsId: "${SONAQUBE_CRED}" 
+              }
+            }
+        }
+
+
+
 }
 }
