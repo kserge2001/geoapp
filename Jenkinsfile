@@ -14,7 +14,7 @@ pipeline {
        APP_NAME = 'geoapp'
        JFROG_CRED = 'jfrog-cred'
        ARTIFACTPATH = 'target/*.jar'
-       ARTIFACTORY_URL = 'http://54.89.255.66/artifactory'
+       ARTIFACTORY_URL = 'http://54.89.255.66:8081/artifactory'
        REPO = 'geolocation'
        ARTIFACTTARGETPATH = 'release_${BUILD_ID}.jar'
        DOCKER_REPO = '076892551558.dkr.ecr.us-east-1.amazonaws.com/devops'
