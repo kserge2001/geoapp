@@ -111,7 +111,7 @@ pipeline {
           script{
         //def ecr_passwrd=sh(script: "aws ecr-public get-login-password --region 'us-east-1'")
          //sh "docker login --username AWS --password ${ecr_passwrd} public.ecr.aws/g0j7o9l5"   
-        sh "/usr/local/bin/aws ecr-public get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${REPO_URL}"
+        sh "/usr/local/bin/aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${REPO_URL}"
         sh "docker push ${DOCKER_REPO}:latest "
         sh "docker push ${DOCKER_REPO}:${BUILD_ID} "
         }
